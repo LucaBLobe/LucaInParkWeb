@@ -1,0 +1,6 @@
+@LucaInParkWeb_HostAddress = http://localhost:5094
+
+GET {{LucaInParkWeb_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
