@@ -7,18 +7,24 @@
         public string Placa { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-        public TimeSpan Duration { get; set; }
+        public TimeSpan? Duration { get; set; }
         public int CostFlag { get; set; }
+        public decimal PrecoUnitario { get; set; }
+        public decimal PrecoFinal { get; set; }
         public bool Active { get; set; }
 
         public Veiculo()
         {
             VeiculoId = string.IsNullOrEmpty(VeiculoId) ? BaseEntity.GeneratorId() : string.Empty;
-            Modelo = string.IsNullOrEmpty(Modelo) ? "" : string.Empty;
-            Placa = string.IsNullOrEmpty(Placa) ? "" : string.Empty;
+            Modelo = string.Empty;
+            Placa = string.Empty;
+            StartTime = DateTime.Now;
             EndTime = null;
             Duration = TimeSpan.Zero;
             CostFlag = 0;
+            Active = true;
+            PrecoUnitario = 5.00m;
+            PrecoFinal = 0.00m;
         }
     
     }

@@ -6,8 +6,8 @@ namespace LucaInParkWeb.Models.Infrastructure.Repositories
     {
         Task Create(Veiculo veiculo);
         Task Update(Veiculo veiculo);
-        Task<List<Veiculo>> VeiculoList(Veiculo veiculo);
+        Task<List<Veiculo>> VeiculoList();
         Task Delete(string veiculo);
-        Task<Veiculo> Read(string veiculo);
+        Task<Veiculo> Read(string veiculoId);
     }
 }

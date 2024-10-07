@@ -24,11 +24,14 @@ namespace LucaInParkWeb.Models.Infrastructure.Repositories
             var veiculo = await Read(veiculoId);
             if (veiculo != null && !string.IsNullOrEmpty(veiculo.VeiculoId) && veiculo.VeiculoId.Equals(veiculoId))
                 context.Veiculos.Remove(veiculo);
+                await context.SaveChangesAsync();
+
         }
 
         public async Task<Veiculo> Read(string veiculoId)
         {
-            return await context.Veiculos.FirstOrDefaultAsync(v => v.VeiculoId.Equals(veiculoId));
+            //return await context.Veiculos.FirstOrDefaultAsync(v => v.VeiculoId.Equals(veiculoId));
+            return await context.Veiculos.FindAsync(veiculoId);
         }
 
         public async Task Update(Veiculo veiculo)
@@ -36,11 +39,19 @@ namespace LucaInParkWeb.Models.Infrastructure.Repositories
             var veiculoAtualizado = await Read(veiculo.VeiculoId);
             if (veiculo != null && !string.IsNullOrEmpty(veiculo.VeiculoId) && veiculo.VeiculoId.Equals(veiculo.VeiculoId))
             {
+                veiculoAtualizado.Modelo = veiculo.Modelo;
+                veiculoAtualizado.Placa = veiculo.Placa;
+                veiculoAtualizado.EndTime = veiculo.EndTime;
+                veiculoAtualizado.Duration = veiculo.Duration;
+                veiculoAtualizado.Active = veiculo.Active;
+                veiculoAtualizado.PrecoFinal = veiculo.PrecoFinal;
+
                 context.Veiculos.Update(veiculo);
+                await context.SaveChangesAsync();
             }
         }
 
-        public async Task<List<Veiculo>> VeiculoList(Veiculo veiculo)
+        public async Task<List<Veiculo>> VeiculoList()
         {
             return await context.Veiculos.ToListAsync();
         }

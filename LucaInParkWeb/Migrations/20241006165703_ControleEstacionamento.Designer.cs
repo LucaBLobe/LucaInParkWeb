@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LucaInParkWeb.Migrations
 {
     [DbContext(typeof(ControleEstacionamentoContext))]
-    [Migration("20241004145157_ControleEstacionamento")]
+    [Migration("20241006165703_ControleEstacionamento")]
     partial class ControleEstacionamento
     {
         /// <inheritdoc />
@@ -36,10 +36,10 @@ namespace LucaInParkWeb.Migrations
                     b.Property<int>("CostFlag")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Duration")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modelo")
@@ -49,6 +49,12 @@ namespace LucaInParkWeb.Migrations
                     b.Property<string>("Placa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PrecoFinal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrecoUnitario")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");

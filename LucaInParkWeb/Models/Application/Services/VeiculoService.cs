@@ -35,11 +35,11 @@ namespace LucaInParkWeb.Models.Application.Services
             }
         }
 
-        public async Task<Veiculo> Read(string veiculo)
+        public async Task<Veiculo> Read(string veiculoId)
         {
             try
             {
-               return await _veiculoRepository.Read(veiculo);
+               return await _veiculoRepository.Read(veiculoId);
             }
             catch (Exception ex)
             {
@@ -59,11 +59,11 @@ namespace LucaInParkWeb.Models.Application.Services
             }
         }
 
-        public async Task<List<Veiculo>> VeiculoList(Veiculo veiculo)
+        public async Task<List<Veiculo>> VeiculoList()
         {
             try
             {
-                return await _veiculoRepository.VeiculoList(veiculo);
+                return await _veiculoRepository.VeiculoList();
             }
             catch (Exception ex)
             {
@@ -77,12 +77,23 @@ namespace LucaInParkWeb.Models.Application.Services
                 if (veiculo.Active.Equals(true))
                 {
                     veiculo.EndTime = DateTime.Now;
-                    veiculo.Duration = (TimeSpan)(veiculo.EndTime - veiculo.StartTime);
-                    veiculo.CostFlag = (veiculo.Duration.Days * 24) + veiculo.Duration.Hours;
-                    if (veiculo.Duration.Minutes > 10)
+                    var duration = new TimeSpan(0, 0, 0, 0);
+                    duration = (TimeSpan)(veiculo.EndTime - veiculo.StartTime);
+                    veiculo.CostFlag = (duration.Days * 24) + duration.Hours;
+                    if (duration.TotalMinutes <= 30)
+                    {
+                        veiculo.PrecoFinal = veiculo.PrecoUnitario / 2;
+                        veiculo.CostFlag = 0;
+                    }else if(duration.Minutes >= 10)
                     {
                         veiculo.CostFlag = veiculo.CostFlag + 1;
+                        veiculo.PrecoFinal = veiculo.PrecoUnitario * veiculo.CostFlag;
                     }
+                    else
+                    {
+                        veiculo.PrecoFinal = veiculo.PrecoUnitario * veiculo.CostFlag;
+                    }
+                    veiculo.Duration = duration;
                     veiculo.Active = false;
                     await _veiculoRepository.Update(veiculo); 
                 } 

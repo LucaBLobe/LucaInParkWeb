@@ -10,7 +10,7 @@ namespace LucaInParkWeb.Controllers
     public class VeiculoController : ControllerBase
     {
         private readonly IVeiculoService _veiculoService;
-
+        
         public VeiculoController(IVeiculoService veiculoService)
         {
             _veiculoService = veiculoService;
@@ -33,14 +33,14 @@ namespace LucaInParkWeb.Controllers
         } 
 
         [HttpPut]
-        [Route("Checkout")]
-        public async Task<string> Update([FromBody] VeiculoDto veiculo)
+        [Route("Checkout/{id}")]
+        public async Task<string> Checkout(string id)
         {
             try
             {
-                var entity = veiculo.ConvertToEntity();
-                await _veiculoService.Create(entity);
-                return "Confirmado novo estacionamento.";
+                var veiculoRepository = await _veiculoService.Read(id);
+                await _veiculoService.Checkout(veiculoRepository);
+                return "Checkout Realizado.";
             }
             catch (Exception ex) 
             {
@@ -50,13 +50,43 @@ namespace LucaInParkWeb.Controllers
         
         [HttpGet]
         [Route("List")]
-        public async Task<List<Veiculo>> VeiculoList(Veiculo veiculo)
+        public async Task<List<Veiculo>> VeiculoList()
         {
             try
             {
-                return await _veiculoService.VeiculoList(veiculo);
+                return await _veiculoService.VeiculoList();
             }
             catch (Exception ex) 
+            {
+                throw ex;
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteById/{id}")]
+        public async Task<string> Delete(string id)
+        {
+            try
+            {
+                
+                await _veiculoService.Delete(id);
+                return "vaga excluida";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Route("Read/{id}")]
+        public async Task<Veiculo> Read(string id)
+        {
+            try
+            {
+                return await _veiculoService.Read(id);
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
