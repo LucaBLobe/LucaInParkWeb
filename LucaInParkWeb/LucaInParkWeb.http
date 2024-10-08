@@ -1,6 +1,10 @@
-@LucaInParkWeb_HostAddress = http://localhost:5094
+@LucaInParkWeb_HostAddress = http://localhost:5000
 
-GET {{LucaInParkWeb_HostAddress}}/weatherforecast/
+GET {{LucaInParkWeb_HostAddress}}/veiculo/
 Accept: application/json
 
 ###
+PUT {{LucaInParkWeb_HostAddress}}/veiculo/
+Content-Type: application/json
+
+Access-Control-Request

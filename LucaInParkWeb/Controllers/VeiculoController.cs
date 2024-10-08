@@ -32,7 +32,7 @@ namespace LucaInParkWeb.Controllers
             }
         } 
 
-        [HttpPut]
+        [HttpPatch]
         [Route("Checkout/{id}")]
         public async Task<string> Checkout(string id)
         {
