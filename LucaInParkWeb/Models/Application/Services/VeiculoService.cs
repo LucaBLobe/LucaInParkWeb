@@ -1,5 +1,6 @@
 ﻿using LucaInParkWeb.Models.Domain.Entities;
 using LucaInParkWeb.Models.Infrastructure.Repositories;
+using System;
 
 namespace LucaInParkWeb.Models.Application.Services
 {
@@ -93,7 +94,8 @@ namespace LucaInParkWeb.Models.Application.Services
                     {
                         veiculo.PrecoFinal = veiculo.PrecoUnitario * veiculo.CostFlag;
                     }
-                    veiculo.Duration = duration;
+                    var durationString = duration.ToString(@"dd\.hh\:mm\:ss");
+                    veiculo.Duration = durationString;
                     veiculo.Active = false;
                     await _veiculoRepository.Update(veiculo); 
                 } 
@@ -104,5 +106,6 @@ namespace LucaInParkWeb.Models.Application.Services
                 throw ex;
             }
         }
+
     }
 }

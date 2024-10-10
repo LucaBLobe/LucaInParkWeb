@@ -7,7 +7,7 @@
         public string Placa { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-        public TimeSpan? Duration { get; set; }
+        public string Duration { get; set; }
         public int CostFlag { get; set; }
         public decimal PrecoUnitario { get; set; }
         public decimal PrecoFinal { get; set; }
@@ -20,7 +20,7 @@
             Placa = string.Empty;
             StartTime = DateTime.Now;
             EndTime = null;
-            Duration = TimeSpan.Zero;
+            Duration = string.Empty;
             CostFlag = 0;
             Active = true;
             PrecoUnitario = 5.00m;

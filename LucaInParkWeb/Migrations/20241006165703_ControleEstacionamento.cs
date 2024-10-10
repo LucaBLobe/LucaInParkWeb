@@ -20,7 +20,7 @@ namespace LucaInParkWeb.Migrations
                     Placa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Duration = table.Column<TimeSpan>(type: "time", nullable: false),
+                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CostFlag = table.Column<int>(type: "int", nullable: false),
                     PrecoUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PrecoFinal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
