@@ -16,6 +16,9 @@ namespace LucaInParkWeb.Models.Application.Services
         {
             try
             {
+                var startDate = veiculo.StartTime;
+                var vigencia = await _veiculoRepository.GetTabelaPreco(startDate);
+                veiculo.PrecoUnitario = vigencia.PrecoVigencia;
                 await _veiculoRepository.Create(veiculo);
             }
             catch (Exception ex)

@@ -6,6 +6,7 @@ namespace LucaInParkWeb.Models.Infrastructure.Contexts
     public class ControleEstacionamentoContext : DbContext
     {
         public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<TabelaPreco> TabelaPrecos { get; set; }
         public ControleEstacionamentoContext(DbContextOptions options) 
             : base(options)
         { 

@@ -30,8 +30,13 @@ namespace LucaInParkWeb.Models.Infrastructure.Repositories
 
         public async Task<Veiculo> Read(string veiculoId)
         {
-            //return await context.Veiculos.FirstOrDefaultAsync(v => v.VeiculoId.Equals(veiculoId));
             return await context.Veiculos.FindAsync(veiculoId);
+        }
+
+        public async Task<TabelaPreco> GetTabelaPreco(DateTime startDate)
+        {
+
+            return await context.TabelaPrecos.Where(p => p.InicioVigencia.Date <= startDate.Date && p.FimVigencia.Date >= startDate.Date).FirstOrDefaultAsync();
         }
 
         public async Task Update(Veiculo veiculo)

@@ -23,7 +23,7 @@
             Duration = string.Empty;
             CostFlag = 0;
             Active = true;
-            PrecoUnitario = 5.00m;
+            PrecoUnitario = 0.00m;
             PrecoFinal = 0.00m;
         }
     
