@@ -68,7 +68,6 @@ namespace LucaInParkWeb.Controllers
         {
             try
             {
-                
                 await _veiculoService.Delete(id);
                 return "vaga excluida";
             }

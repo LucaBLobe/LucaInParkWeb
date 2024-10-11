@@ -16,6 +16,8 @@ builder.Services.AddDbContext<ControleEstacionamentoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 builder.Services.AddScoped<IVeiculoService, VeiculoService>();
+builder.Services.AddScoped<ITabelaPrecoRepository, TabelaPrecoRepository>();
+builder.Services.AddScoped<ITabelaPrecoService, TabelaPrecoService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",

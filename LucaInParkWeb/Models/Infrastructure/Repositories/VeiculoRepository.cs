@@ -25,7 +25,6 @@ namespace LucaInParkWeb.Models.Infrastructure.Repositories
             if (veiculo != null && !string.IsNullOrEmpty(veiculo.VeiculoId) && veiculo.VeiculoId.Equals(veiculoId))
                 context.Veiculos.Remove(veiculo);
                 await context.SaveChangesAsync();
-
         }
 
         public async Task<Veiculo> Read(string veiculoId)
