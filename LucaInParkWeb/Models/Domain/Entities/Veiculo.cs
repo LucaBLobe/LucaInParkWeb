@@ -9,7 +9,8 @@
         public DateTime? EndTime { get; set; }
         public string Duration { get; set; }
         public int CostFlag { get; set; }
-        public decimal PrecoUnitario { get; set; }
+        public decimal PrecoInicial { get; set; }
+        public decimal PrecoAdicional { get; set; }
         public decimal PrecoFinal { get; set; }
         public bool Active { get; set; }
 
@@ -23,7 +24,8 @@
             Duration = string.Empty;
             CostFlag = 0;
             Active = true;
-            PrecoUnitario = 0.00m;
+            PrecoInicial = 0.00m;
+            PrecoAdicional = 0.00m;
             PrecoFinal = 0.00m;
         }
     

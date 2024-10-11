@@ -36,7 +36,10 @@ namespace LucaInParkWeb.Migrations
                     b.Property<DateTime>("InicioVigencia")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("PrecoVigencia")
+                    b.Property<decimal>("PrecoVigenciaAdicional")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrecoVigenciaInicial")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -70,10 +73,13 @@ namespace LucaInParkWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("PrecoAdicional")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("PrecoFinal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("PrecoUnitario")
+                    b.Property<decimal>("PrecoInicial")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("StartTime")

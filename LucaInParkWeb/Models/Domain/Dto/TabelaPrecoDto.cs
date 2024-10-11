@@ -6,7 +6,8 @@ namespace LucaInParkWeb.Models.Domain.Dto
     {
         public DateTime InicioVigencia { get; set; }
         public DateTime FimVigencia { get; set; }
-        public string PrecoVigencia { get; set; }
+        public string PrecoVigenciaInicial { get; set; }
+        public string PrecoVigenciaAdicional { get; set; }
 
         public TabelaPrecoDto()
         { 
@@ -16,7 +17,7 @@ namespace LucaInParkWeb.Models.Domain.Dto
             var tabelaPreco = new TabelaPreco();
             tabelaPreco.InicioVigencia = this.InicioVigencia;
             tabelaPreco.FimVigencia = this.FimVigencia;
-            tabelaPreco.PrecoVigencia = 0.00m;
+            tabelaPreco.PrecoVigenciaInicial = 0.00m;
 
             return tabelaPreco;
         }

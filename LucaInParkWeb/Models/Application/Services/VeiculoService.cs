@@ -18,7 +18,8 @@ namespace LucaInParkWeb.Models.Application.Services
             {
                 var startDate = veiculo.StartTime;
                 var vigencia = await _veiculoRepository.GetTabelaPreco(startDate);
-                veiculo.PrecoUnitario = vigencia.PrecoVigencia;
+                veiculo.PrecoInicial = vigencia.PrecoVigenciaInicial;
+                veiculo.PrecoAdicional = vigencia.PrecoVigenciaAdicional;
                 await _veiculoRepository.Create(veiculo);
             }
             catch (Exception ex)
@@ -86,16 +87,22 @@ namespace LucaInParkWeb.Models.Application.Services
                     veiculo.CostFlag = (duration.Days * 24) + duration.Hours;
                     if (duration.TotalMinutes <= 30)
                     {
-                        veiculo.PrecoFinal = veiculo.PrecoUnitario / 2;
-                        veiculo.CostFlag = 0;
+                        veiculo.PrecoFinal = veiculo.PrecoInicial / 2;
+                        veiculo.CostFlag = 1;
+                        veiculo.PrecoAdicional = 0;
+                    }else if (duration.TotalMinutes <= 70)
+                    {
+                        veiculo.PrecoFinal = veiculo.PrecoInicial;
+                        veiculo.CostFlag = 1;
+                        veiculo.PrecoAdicional = 0;
                     }else if(duration.Minutes >= 10)
                     {
                         veiculo.CostFlag = veiculo.CostFlag + 1;
-                        veiculo.PrecoFinal = veiculo.PrecoUnitario * veiculo.CostFlag;
+                        veiculo.PrecoFinal = veiculo.PrecoInicial + (veiculo.PrecoAdicional * veiculo.CostFlag);
                     }
                     else
                     {
-                        veiculo.PrecoFinal = veiculo.PrecoUnitario * veiculo.CostFlag;
+                        veiculo.PrecoFinal = veiculo.PrecoInicial * veiculo.CostFlag;
                     }
                     var durationString = duration.ToString(@"dd\.hh\:mm\:ss");
                     veiculo.Duration = durationString;
